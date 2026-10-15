@@ -1,8 +1,8 @@
 name: Python workflow
 
 on:
-  push:
-    branches: [ poc-756-rawapi ]
+  # push:
+  #   branches: [ poc-756-rawapi ]
   workflow_dispatch:
   
 

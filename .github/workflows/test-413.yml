@@ -1,0 +1,35 @@
+name: Python workflow
+
+on:
+  push:
+    branches: [ poc-756-rawapi ]
+  workflow_dispatch:
+  
+
+jobs:
+  build:
+    runs-on: windows-2025
+
+    steps:
+    - uses: actions/checkout@v7
+
+    - name: Set up Python 3.16.0-alpha.1
+      # uses: actions/setup-python@v7
+      uses: priya-kinthali/setup-python@test-413-pr
+      with:
+        python-version: '3.16.0-alpha.1'
+        free-threaded: true
+
+    # - name: Display Python version
+    #   run: python --version
+    - name: Verify python.exe (free-threaded)
+      if: matrix.platform == 'win32'
+      run: |
+          $py = (Get-Command python).Path
+          Write-Host "python on PATH: $py"
+          Get-ChildItem (Split-Path $py) -Filter *.exe | Select-Object Name, LinkType, Target | Format-Table
+
+          python -VV
+          python -c "import sys, sysconfig; print(sys.executable); ft = sysconfig.get_config_var('Py_GIL_DISABLED') == 1; print('free-threaded build:', ft); print('GIL enabled:', sys._is_gil_enabled()); assert (not ft) == ('${{ matrix.arch }}'.find('freethreaded') < 0), 'build type does not match matrix arch'"
+          python3 -c "import sys; print('python3 ->', sys.executable)"
+          pip --version
