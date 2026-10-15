@@ -25,12 +25,9 @@ jobs:
     #   run: python --version
     - name: Verify python.exe (free-threaded)
       if: runner.os == 'Windows'
+      shell: pwsh
       run: |
-          $py = (Get-Command python).Path
-          Write-Host "python on PATH: $py"
-          Get-ChildItem (Split-Path $py) -Filter *.exe | Select-Object Name, LinkType, Target | Format-Table
-
           python -VV
-          python -c "import sys, sysconfig; print(sys.executable); ft = sysconfig.get_config_var('Py_GIL_DISABLED') == 1; print('free-threaded build:', ft); print('GIL enabled:', sys._is_gil_enabled()); assert (not ft) == ('${{ matrix.arch }}'.find('freethreaded') < 0), 'build type does not match matrix arch'"
+          python -c "import sys, sysconfig; ft = sysconfig.get_config_var('Py_GIL_DISABLED') == 1; exp = 'freethreaded' in sys.prefix; print(sys.executable, '| free-threaded:', ft); assert ft == exp, f'expected free-threaded={exp}, got {ft}'"
           python3 -c "import sys; print('python3 ->', sys.executable)"
           pip --version
