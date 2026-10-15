@@ -18,7 +18,7 @@ jobs:
       uses: v-priya-kinthali/setup-python@test-413-pr
       with:
         python-version: 3.16.0-alpha.1
-        # freethreaded: true
+        freethreaded: true
 
     # - name: Display Python version
     #   run: python --version
