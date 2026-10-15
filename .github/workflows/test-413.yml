@@ -15,7 +15,7 @@ jobs:
 
     - name: Set up Python 3.16.0-alpha.1
       # uses: actions/setup-python@v7
-      uses: priya-kinthali/setup-python@test-413-pr
+      uses: v-priya-kinthali/setup-python@test-413-pr
       with:
         python-version: 3.16.0-alpha.1
         freethreaded: true
