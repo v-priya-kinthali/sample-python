@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: windows-11-arm
 
     steps:
     - uses: actions/checkout@v7
@@ -23,7 +23,7 @@ jobs:
     # - name: Display Python version
     #   run: python --version
     - name: Verify python.exe (free-threaded)
-      if: matrix.platform == 'win32'
+      if: runner.os == 'Windows'
       run: |
           $py = (Get-Command python).Path
           Write-Host "python on PATH: $py"
