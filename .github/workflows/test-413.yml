@@ -19,7 +19,7 @@ jobs:
       with:
         python-version: 3.16.0-alpha.1
         mirror: https://raw.githubusercontent.com/priya-kinthali/python-versions/update-versions-manifest-file
-
+        freethread: true
 
     # - name: Display Python version
     #   run: python --version
