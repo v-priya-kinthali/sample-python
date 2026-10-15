@@ -18,7 +18,6 @@ jobs:
       uses: priya-kinthali/setup-python@test-413-pr
       with:
         python-version: 3.16.0-alpha.1
-        mirror: https://raw.githubusercontent.com/priya-kinthali/python-versions/update-versions-manifest-file
         freethreaded: true
 
     # - name: Display Python version
