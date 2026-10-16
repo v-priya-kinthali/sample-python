@@ -30,3 +30,5 @@ jobs:
           python -c "import sys, sysconfig; ft = sysconfig.get_config_var('Py_GIL_DISABLED') == 1; exp = 'freethreaded' in sys.prefix; print(sys.executable, '| free-threaded:', ft); assert ft == exp, f'expected free-threaded={exp}, got {ft}'"
           python3 -c "import sys; print('python3 ->', sys.executable)"
           pip --version
+    - name: Check standard-library test suite
+      run: python -c "import test.support, test.libregrtest; print('Lib/test is available')"
